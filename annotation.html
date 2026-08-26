@@ -8,7 +8,7 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar border-bottom">
+    <nav class="navbar border-bottom" aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
                 <img src="img/logo.png" alt="" height="40">
@@ -34,11 +34,11 @@
 
     <main class="annotation py-4">
         <div class="container">
-            <p class="annotation-progress text-muted text-center mb-3">1 / 69</p>
+            <p class="annotation-progress text-muted text-center mb-3" role="status" aria-label="Прогресс: 1 из 69">1 / 69</p>
             <div class="annotation-image-wrap mx-auto mb-4">
                 <img src="img/dog.jpg" alt="Изображение для разметки" class="annotation-image">
             </div>
-            <div class="annotation-classes d-flex justify-content-center gap-3 mb-4">
+            <div class="annotation-classes d-flex justify-content-center gap-3 mb-4" role="group" aria-label="Выберите класс изображения">
                 <input type="radio" class="btn-check" name="class" id="class-dog" value="dog" autocomplete="off">
                 <label class="btn btn-outline-primary btn-lg" for="class-dog">Собака</label>
                 <input type="radio" class="btn-check" name="class" id="class-cat" value="cat" autocomplete="off">

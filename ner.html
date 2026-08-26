@@ -8,7 +8,7 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar border-bottom">
+    <nav class="navbar border-bottom" aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
                 <img src="img/logo.png" alt="" height="40">
@@ -32,19 +32,19 @@
         </div>
     </header>
 
-    <div class="py-4">
+    <main class="py-4">
         <div class="container" style="max-width: 780px;">
-            <p class="text-muted text-center mb-3">1 / 30</p>
+            <p class="text-muted text-center mb-3" role="status" aria-label="Прогресс: 1 из 30">1 / 30</p>
 
-            <div class="d-flex gap-3 flex-wrap mb-3">
-                <span class="d-flex align-items-center gap-1 small">
-                    <span class="ner-legend-dot" style="background:#3b82f633; border-bottom: 2px solid #3b82f6;"></span> ФИО
+            <div class="d-flex gap-3 flex-wrap mb-3" role="list" aria-label="Обозначения типов сущностей">
+                <span class="d-flex align-items-center gap-1 small" role="listitem">
+                    <span class="ner-legend-dot" style="background:#3b82f633; border-bottom: 2px solid #3b82f6;" aria-hidden="true"></span> ФИО
                 </span>
-                <span class="d-flex align-items-center gap-1 small">
-                    <span class="ner-legend-dot" style="background:#10b98133; border-bottom: 2px solid #10b981;"></span> Дата рождения
+                <span class="d-flex align-items-center gap-1 small" role="listitem">
+                    <span class="ner-legend-dot" style="background:#10b98133; border-bottom: 2px solid #10b981;" aria-hidden="true"></span> Дата рождения
                 </span>
-                <span class="d-flex align-items-center gap-1 small">
-                    <span class="ner-legend-dot" style="background:#f59e0b33; border-bottom: 2px solid #f59e0b;"></span> Серия/номер паспорта
+                <span class="d-flex align-items-center gap-1 small" role="listitem">
+                    <span class="ner-legend-dot" style="background:#f59e0b33; border-bottom: 2px solid #f59e0b;" aria-hidden="true"></span> Серия/номер паспорта
                 </span>
             </div>
 
@@ -55,10 +55,10 @@
                         <p>Ut enim ad minim veniam Петрова Наталья Сергеевна, 07 ноября 1992 года рождения, серия паспорта 46&nbsp;11 номер 345678 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         <p>Duis aute irure dolor Сидоров Алексей Дмитриевич, 23 июня 1978 года рождения in reprehenderit, серия паспорта 50&nbsp;07 номер 123456 in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                     </div>
-                    <div id="ner-popup" class="ner-popup d-none">
-                        <button class="btn btn-sm ner-entity-btn" data-entity="fio" style="background:#3b82f620; border-color:#3b82f6; color:#1d4ed8;">ФИО</button>
-                        <button class="btn btn-sm ner-entity-btn" data-entity="dob" style="background:#10b98120; border-color:#10b981; color:#065f46;">Дата рождения</button>
-                        <button class="btn btn-sm ner-entity-btn" data-entity="passport" style="background:#f59e0b20; border-color:#f59e0b; color:#92400e;">Серия/номер паспорта</button>
+                    <div id="ner-popup" class="ner-popup d-none" role="dialog" aria-label="Выберите тип сущности">
+                        <button class="btn btn-sm ner-entity-btn" data-entity="fio" style="background:#3b82f620; border-color:#3b82f6; color:#1d4ed8;" aria-label="Отметить как ФИО">ФИО</button>
+                        <button class="btn btn-sm ner-entity-btn" data-entity="dob" style="background:#10b98120; border-color:#10b981; color:#065f46;" aria-label="Отметить как Дата рождения">Дата рождения</button>
+                        <button class="btn btn-sm ner-entity-btn" data-entity="passport" style="background:#f59e0b20; border-color:#f59e0b; color:#92400e;" aria-label="Отметить как Серия/номер паспорта">Серия/номер паспорта</button>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <button type="button" class="btn btn-primary btn-lg" id="confirm-btn">Подтвердить</button>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer class="border-top py-3 mt-auto">
         <div class="container text-center text-muted">
