@@ -1,4 +1,35 @@
 (function () {
+    const API_URL = 'http://localhost:3000';
+
+    function updateNavbar() {
+        const token = localStorage.getItem('accessToken');
+        const navActions = document.querySelector('.d-flex.align-items-center.gap-3');
+        if (!navActions) return;
+
+        const loginBtn = navActions.querySelector('[data-bs-target="#loginModal"]');
+        const registerBtn = navActions.querySelector('[data-bs-target="#registerModal"]');
+
+        if (token) {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (registerBtn) registerBtn.style.display = 'none';
+
+            if (!document.getElementById('nav-user-info')) {
+                navActions.insertAdjacentHTML('beforeend', `
+                    <span id="nav-user-info" class="d-flex align-items-center gap-2">
+                        <span class="text-muted">${user.name || user.email}</span>
+                        <button class="btn btn-outline-danger" id="logoutBtn">Выйти</button>
+                    </span>
+                `);
+                document.getElementById('logoutBtn').addEventListener('click', function () {
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('user');
+                    window.location.href = 'index.html';
+                });
+            }
+        }
+    }
+
     if (document.getElementById('loginModal')) return;
 
     const markup = `
@@ -10,6 +41,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
+                <div id="loginError" class="alert alert-danger d-none"></div>
                 <form id="loginForm">
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label">Email</label>
@@ -38,6 +70,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
+                <div id="registerError" class="alert alert-danger d-none"></div>
                 <form id="registerForm">
                     <div class="mb-3">
                         <label for="registerName" class="form-label">Имя</label>
@@ -69,23 +102,88 @@
 
     document.body.insertAdjacentHTML('beforeend', markup);
 
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
         e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const loginData = {};
+        formData.forEach((value, key) => loginData[key] = value);
+
+        const errorEl = document.getElementById('loginError');
+        errorEl.classList.add('d-none');
+
+        try {
+            const response = await fetch(`${API_URL}/login`, {
+                method: 'POST',
+                body: JSON.stringify(loginData),
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (!response.ok) {
+                errorEl.textContent = 'Неверный email или пароль';
+                errorEl.classList.remove('d-none');
+                return;
+            }
+
+            const { accessToken, user } = await response.json();
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('user', JSON.stringify(user));
+
+            window.location.href = 'profile.html';
+        } catch {
+            errorEl.textContent = 'Ошибка соединения с сервером';
+            errorEl.classList.remove('d-none');
+        }
     });
 
-    document.getElementById('registerForm').addEventListener('submit', function (e) {
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
         e.preventDefault();
+
         const password = document.getElementById('registerPassword').value;
         const confirm = document.getElementById('registerPasswordConfirm').value;
+
+        const errorEl = document.getElementById('registerError');
+        errorEl.classList.add('d-none');
+
         if (password !== confirm) {
             document.getElementById('registerPasswordConfirm').setCustomValidity('Пароли не совпадают');
             document.getElementById('registerPasswordConfirm').reportValidity();
             return;
         }
         document.getElementById('registerPasswordConfirm').setCustomValidity('');
+
+        const formData = new FormData(e.target);
+        const registerData = {};
+        formData.forEach((value, key) => registerData[key] = value);
+        delete registerData.passwordConfirm;
+
+        try {
+            const response = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                body: JSON.stringify(registerData),
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (!response.ok) {
+                errorEl.textContent = 'Ошибка регистрации. Email уже занят?';
+                errorEl.classList.remove('d-none');
+                return;
+            }
+
+            const { accessToken, user } = await response.json();
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('user', JSON.stringify(user));
+
+            window.location.href = 'profile.html';
+        } catch {
+            errorEl.textContent = 'Ошибка соединения с сервером';
+            errorEl.classList.remove('d-none');
+        }
     });
 
     document.getElementById('registerPasswordConfirm').addEventListener('input', function () {
         this.setCustomValidity('');
     });
+
+    document.addEventListener('DOMContentLoaded', updateNavbar);
 })();
