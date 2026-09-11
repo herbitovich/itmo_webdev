@@ -160,32 +160,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="annotations" role="tabpanel" aria-labelledby="annotations-tab">
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-4">
-                            <article class="card order-card h-100">
-                                <img src="img/image_classification.png" class="card-img-top order-card-cover" alt="Классификация изображений">
-                                <div class="card-body d-flex flex-column">
-                                    <h3 class="card-title h5">Коты и Собаки</h3>
-                                    <p class="order-card-type text-muted mb-2"><span>Классификация изображений</span><svg class="order-card-type-icon"><use xlink:href="#icon-image-classification"></use></svg></p>
-                                    <p class="card-text flex-grow-1">Разметить фотографии питомцев для бесплатного онлайн-курса по ML в ИТМО.</p>
-                                    <p class="order-card-price fw-semibold mb-3">Бесплатно</p>
-                                    <a class="btn btn-primary mt-auto" href="annotation.html">Продолжить</a>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <article class="card order-card h-100">
-                                <img src="img/ner.png" class="card-img-top order-card-cover" alt="Распознавание именованных сущностей">
-                                <div class="card-body d-flex flex-column">
-                                    <h3 class="card-title h5">Распознавание паспортных данных</h3>
-                                    <p class="order-card-type text-muted mb-2"><span>NER</span><svg class="order-card-type-icon"><use xlink:href="#icon-ner"></use></svg></p>
-                                    <p class="card-text flex-grow-1">Выделить ФИО, серию и номер паспорта в переписках с жертвами телефонных мошенников.</p>
-                                    <p class="order-card-price fw-semibold mb-3" data-price-rub="150" data-price-suffix="/ 100 dp">150 ₽ / 100 dp</p>
-                                    <a class="btn btn-primary mt-auto" href="annotation.html">Продолжить</a>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
+                    <div id="annotations-grid" class="row g-4"></div>
                 </div>
 
                 <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
@@ -202,7 +177,7 @@
                             <div class="card stat-card h-100">
                                 <div class="card-body">
                                     <p class="stat-card-label text-muted mb-1">Аннотированных проектов</p>
-                                    <p class="stat-card-value mb-0">2</p>
+                                    <p class="stat-card-value mb-0" id="stat-annotations">2</p>
                                 </div>
                             </div>
                         </div>
@@ -258,5 +233,7 @@
             if (nameEl && user.name) nameEl.textContent = user.name;
         })();
     </script>
+    <script src="js/api.js"></script>
+    <script src="js/profile.js"></script>
 </body>
 </html>
