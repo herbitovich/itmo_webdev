@@ -12,7 +12,7 @@
 
 Добавлены aria-лейблы, проверял корректность в Firefox Dev tools.
 
-Запуск бэка для регистрации: npm install & npm start; запуск локального сервера: npx http-server .
+Запуск бэка для регистрации: npm install && npm start; запуск локального сервера: npx http-server .
 
 P.S.
 Идея названия - annotator похоже по звучанию на anna taylor (joy)
