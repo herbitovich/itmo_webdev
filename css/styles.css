@@ -43,6 +43,16 @@ aside {
 
 .order-card-type {
     font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.order-card-type-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    color: var(--bs-body-color);
 }
 
 .annotation-image-wrap {
