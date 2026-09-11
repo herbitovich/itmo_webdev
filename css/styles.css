@@ -78,13 +78,13 @@ aside {
 }
 
 .notes-list .card.active {
-    background: var(--bs-gray-300);
+    background: var(--bs-tertiary-bg);
     transition: background ease 500ms;
     cursor: pointer;
 }
 
 .notes-list .card:hover {
-    background: var(--bs-gray-300);
+    background: var(--bs-tertiary-bg);
     transition: background ease 500ms;
     cursor: pointer;
 }
@@ -141,21 +141,21 @@ aside {
 }
 
 .dp-card-empty {
-    background: var(--bs-gray-300);
+    background: var(--bs-secondary-bg);
 }
 
 .dp-card-add {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bs-gray-100);
+    background: var(--bs-tertiary-bg);
     cursor: pointer;
-    color: var(--bs-secondary);
+    color: var(--bs-secondary-color);
     transition: background 150ms ease, color 150ms ease;
 }
 
 .dp-card-add:hover {
-    background: var(--bs-gray-200);
+    background: var(--bs-secondary-bg);
     color: var(--bs-primary);
 }
 
